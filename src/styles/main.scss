@@ -1,0 +1,22 @@
+@import "~reveal/index";
+@import "~reveal/theme/night";
+
+* { box-sizing: border-box; }
+img { border: 0; }
+
+.reveal {
+  section {
+    img {
+      box-shadow: none;
+      border: 0 none;
+      background: none;
+    }
+    pre {
+      background: mediumblue;
+      &.ember {
+        background: rgba(0, 0, 0, 0.5);
+        background-color: firebrick;
+      }
+    }
+  }
+}
