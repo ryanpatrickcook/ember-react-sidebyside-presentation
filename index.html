@@ -198,6 +198,72 @@
             </code>
           </pre>
         </section>
+
+        <!-- React Lifecycle -->
+        <section data-background="royalblue">
+          <h4>React</h4>
+          <div>
+            React has various methods that are executed at specific points in a component's lifecycle.
+            <a href="https://facebook.github.io/react/docs/component-specs.html" target="_blank">More</a>
+          </div>
+          <pre>
+            <code>
+      export default React.createClass({
+        // Invoked immediately before the initial rendering occurs
+        componentWillMount() {},
+
+        // Invoked immediately after the initial rendering occurs
+        componentDidMount() {},
+
+        // Invoked when a component is receiving new props
+        componentWillReceiveProps() {},
+
+        // Invoked before rendering when new props or state are being received
+        shouldComponentUpdate() {},
+
+        // Invoked immediately before rendering when new props or state are being received
+        componentWillUpdate() {},
+
+        // Invoked immediately after the component's updates are flushed to the DOM
+        componentDidUpdate() {},
+
+        // Invoked immediately before a component is unmounted from the DOM
+        componentWillUnmount(),
+        render() { ... }
+      });
+            </code>
+          </pre>
+        </section>
+
+        <!-- Ember Lifecycle -->
+        <section class="ember" data-background="firebrick">
+          <h4>Ember</h4>
+          <div>
+            Ember has various methods that are executed at specific points in a component's lifecycle.
+            <a href="https://guides.emberjs.com/v2.7.0/components/the-component-lifecycle/" target="_blank">More</a>
+          </div>
+          <pre>
+            <code>
+          export default Ember.Component.extend({
+            classNames: ['chat-room'],
+            init() {},
+            didReceiveAttrs() {}, // runs after init
+            willRender(), // runs before render
+            didInsertElement() {}, // after renders its backing HTML element into the DOM
+            didRender() {}, // after render
+
+            didUpdateAttrs() {}, // when the attributes of a component have changed
+            willUpdate() {}, // runs before update
+            didUpdate(), // runs after update
+
+            willDestroyElement() {}, // before removing itself from the DOM
+            willClearRender() {},
+            didDestroyElement() {} // after removal from DOM
+          });
+            </code>
+          </pre>
+        </section>
+
       </div>
     </div>
 
