@@ -126,6 +126,78 @@
             `components/hello-world`, you will be able to use in other templates with `{{hello-world}}`
           </p>
         </section>
+
+        <!-- React Props -->
+        <section data-background="royalblue">
+          <h4>React</h4>
+          <div>
+            React displays data through `props` and `state`. State should contain data that a component's event
+            handlers may change to trigger a UI update
+            <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
+          </div>
+          <pre>
+            <code>
+              // &lt;ChatContainer title="React Chat"/&gt;
+
+              export default React.createClass({
+                getInitialState() {
+                  return { show: false };
+                },
+                getDefaultProps() {
+                  return { title: 'Default Title' };
+                },
+                render() {
+                  let classname = 'chat-room';
+                  classname += this.state.show ? ' show' : ' hide';
+                  return (
+                    &lt;div className={classname}&gt;
+                      &lt;h1>{this.props.title}&lt;/h1&gt;
+                    &lt;/div&gt;
+                  );
+                }
+              });
+            </code>
+          </pre>
+          <pre>
+            <code>
+              &lt;!-- output --&gt;
+              &lt;div class="chat-room hide"&gt;
+                &lt;h1>React Chat&lt;/h1&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+        </section>
+
+        <!-- Ember Props -->
+        <section class="ember" data-background="firebrick">
+          <h4>Ember</h4>
+          <div>
+            Ember uses properties that can be used in the template for display. Properties can be set in the component or passed in.
+            <a href="https://guides.emberjs.com/v2.7.0/components/customizing-a-components-element/" target="_blank">More</a>
+          </div>
+          <pre>
+            <code>
+              // {{chat-container title="Ember Chat"}}
+              export default Ember.Component.extend({
+                classNames: ['chat-room'],
+                classNameBindings: ['isVisible:show:hide'],
+                title: 'Default Title',
+                isVisible: false
+              });
+
+              &lt;!-- app/templates/components/chat-container.hbs --&gt;
+              &lt;h1&gt;{{title}}&lt;/h1&gt;
+            </code>
+          </pre>
+          <pre>
+            <code>
+              &lt;!-- output --&gt;
+              &lt;div id="ember382" class="ember-view chat-room hide"&gt;
+                &lt;h1>Ember Chat&lt;/h1&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+        </section>
       </div>
     </div>
 
