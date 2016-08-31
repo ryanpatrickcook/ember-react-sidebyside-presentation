@@ -13,6 +13,52 @@
           <img src="/images/ember.png" width="250"/>
           <img src="/images/react.png" width="250"/>
         </section>
+
+        <!-- React Init -->
+        <section data-background="royalblue">
+          <h4>React</h4>
+          <div>
+            React needs an initial dom node to attach itself and render the app.
+            <a href="https://facebook.github.io/react/blog/2015/10/01/react-render-and-top-level-api.html" target="_blank">More</a>
+          </div>
+          <pre>
+            <code>
+              &lt;!-- index.html --&gt;
+              &lt;body&gt;
+                &lt;div id="app"&gt;
+                &lt;/div&gt;
+              &lt;/body&gt;
+              ...
+              &lt;!-- src/scripts/main.js --&gt;
+              ReactDOM.render(&lt;ChatContainer /&gt;, document.getElementById('app'));
+            </code>
+          </pre>
+        </section>
+
+        <!-- Ember Init -->
+        <section class="ember" data-background="firebrick">
+          <h4>Ember</h4>
+          <div>
+            Ember uses a content-for helper to render the app; addons can inject content into your application’s head or body
+            <a href="https://ember-cli.com/extending/#content" target="_blank">More</a>
+          </div>
+          <pre class="ember">
+            <code>
+              &lt;!-- app/index.html --&gt;
+              &lt;body&gt;
+                {{content-for "body"}}
+              &lt;/body&gt;
+
+              ...
+
+              &lt;!-- app/templates/application.hbs --&gt;
+              &lt;div id="app"&gt;
+                {{chat-container}}
+                {{outlet}}
+              &lt;/div&gt;
+            </code>
+          </pre>
+        </section>
       </div>
     </div>
 
