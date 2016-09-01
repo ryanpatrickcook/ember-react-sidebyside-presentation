@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/rainbow.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <link href="dist/styles/style.css" rel="stylesheet"/>
   </head>
   <body>
@@ -9,7 +12,7 @@
       <div class="slides">
         <!-- Initial Slide -->
         <section data-background="darkorchid">
-          <h2>Ember.js / React</h2>
+          <h2>Ember / React</h2>
           <img src="/images/ember.png" width="250"/>
           <img src="/images/react.png" width="250"/>
         </section>
@@ -22,15 +25,17 @@
             <a href="https://facebook.github.io/react/blog/2015/10/01/react-render-and-top-level-api.html" target="_blank">More</a>
           </div>
           <pre>
-            <code>
-              &lt;!-- index.html --&gt;
-              &lt;body&gt;
-                &lt;div id="app"&gt;
-                &lt;/div&gt;
-              &lt;/body&gt;
-              ...
-              &lt;!-- src/scripts/main.js --&gt;
-              ReactDOM.render(&lt;ChatContainer /&gt;, document.getElementById('app'));
+            <code class="javascript">
+  &lt;!-- index.html --&gt;
+  &lt;body&gt;
+    &lt;div id="app"&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+
+  ...
+
+  &lt;!-- src/scripts/main.js --&gt;
+  ReactDOM.render(&lt;ChatContainer /&gt;, document.getElementById('app'));
             </code>
           </pre>
         </section>
@@ -43,7 +48,7 @@
             <a href="https://ember-cli.com/extending/#content" target="_blank">More</a>
           </div>
           <pre class="ember">
-            <code>
+            <code class="javascript">
               &lt;!-- app/index.html --&gt;
               &lt;body&gt;
                 {{content-for "body"}}
@@ -69,7 +74,7 @@
             <a href="https://facebook.github.io/react/docs/component-specs.html#render" target="_blank">More</a>
           </p>
           <pre>
-            <code>
+            <code class="javascript">
               &lt;!-- src/scripts/chat-container.js --&gt;
               export default React.createClass({
                 render() {
@@ -87,7 +92,7 @@
             <code>
               &lt;!-- output --&gt;
               &lt;div class="chat-room"&gt;
-                &lt;h1>React Chat&lt;/h1&gt;
+                &lt;h1&gt;React Chat&lt;/h1&gt;
               &lt;/div&gt;
             </code>
           </pre>
@@ -102,7 +107,7 @@
             <a href="http://emberjs.com/api/classes/Ember.Component.html" target="_blank">More</a>
           </p>
           <pre>
-            <code>
+            <code class="javascript">
               &lt;!-- app/components/chat-container.js --&gt;
               export default Ember.Component.extend({
                 tagName: 'div', // default `div`
@@ -117,7 +122,7 @@
             <code>
               &lt;!-- output --&gt;
               &lt;div id="ember382" class="ember-view chat-room"&gt;
-                &lt;h1>Ember Chat&lt;/h1&gt;
+                &lt;h1&gt;Ember Chat&lt;/h1&gt;
               &lt;/div&gt;
             </code>
           </pre>
@@ -136,7 +141,7 @@
             <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
           </div>
           <pre>
-            <code>
+            <code class="javascript">
               // &lt;ChatContainer title="React Chat"/&gt;
 
               export default React.createClass({
@@ -151,7 +156,7 @@
                   classname += this.state.show ? ' show' : ' hide';
                   return (
                     &lt;div className={classname}&gt;
-                      &lt;h1>{this.props.title}&lt;/h1&gt;
+                      &lt;h1&gt;{this.props.title}&lt;/h1&gt;
                     &lt;/div&gt;
                   );
                 }
@@ -176,7 +181,7 @@
             <a href="https://guides.emberjs.com/v2.7.0/components/customizing-a-components-element/" target="_blank">More</a>
           </div>
           <pre>
-            <code>
+            <code class="javascript">
               // {{chat-container title="Ember Chat"}}
               export default Ember.Component.extend({
                 classNames: ['chat-room'],
@@ -193,7 +198,7 @@
             <code>
               &lt;!-- output --&gt;
               &lt;div id="ember382" class="ember-view chat-room hide"&gt;
-                &lt;h1>Ember Chat&lt;/h1&gt;
+                &lt;h1&gt;Ember Chat&lt;/h1&gt;
               &lt;/div&gt;
             </code>
           </pre>
@@ -207,7 +212,7 @@
             <a href="https://facebook.github.io/react/docs/component-specs.html" target="_blank">More</a>
           </div>
           <pre>
-            <code>
+            <code class="javascript">
       export default React.createClass({
         // Invoked immediately before the initial rendering occurs
         componentWillMount() {},
@@ -228,7 +233,7 @@
         componentDidUpdate() {},
 
         // Invoked immediately before a component is unmounted from the DOM
-        componentWillUnmount(),
+        componentWillUnmount() {},
         render() { ... }
       });
             </code>
@@ -243,7 +248,7 @@
             <a href="https://guides.emberjs.com/v2.7.0/components/the-component-lifecycle/" target="_blank">More</a>
           </div>
           <pre>
-            <code>
+            <code class="javascript">
           export default Ember.Component.extend({
             classNames: ['chat-room'],
             init() {},
