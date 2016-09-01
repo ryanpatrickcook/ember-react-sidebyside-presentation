@@ -14,6 +14,9 @@ img { border: 0; }
     pre {
       box-shadow: none;
       background: transparent;
+      code {
+        max-height: inherit;
+      }
     }
   }
 }
