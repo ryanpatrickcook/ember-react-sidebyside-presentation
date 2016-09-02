@@ -345,6 +345,85 @@
           </pre>
         </section>
 
+        <!-- React Click Action -->
+        <section data-background="royalblue">
+          <h4>React</h4>
+          <div>
+            Click Action
+            <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
+          </div>
+          <pre>
+            <code class="javascript">
+              // &lt;ChatContainer title="React Chat"/&gt;
+
+              export default React.createClass({
+                getInitialState() {
+                  return { linkText: 'Initial Text' };
+                },
+                updateText() {
+                  this.setState({ linkText: 'Clicked Text' });
+                },
+                render() {
+                  return (
+                    &lt;div className="chat-room"&gt;
+                      &lt;h1&gt;{this.props.title}&lt;/h1&gt;
+                      &lt;a onClick={this.updateText}&gt;{this.state.linkText}&lt;/a&gt;
+                    &lt;/div&gt;
+                  );
+                }
+              });
+
+              ...
+
+              &lt;!-- output after click --&gt;
+              &lt;div class="chat-room"&gt;
+                &lt;h1&gt;React Chat&lt;/h1&gt;
+                &lt;a&gt;Clicked Text&lt;/a&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+          <aside class="notes">
+            setState() does not immediately mutate this.state but creates a pending state transition.
+            Accessing this.state after calling this method can potentially return the existing value.
+          </aside>
+        </section>
+
+        <!-- Ember Click Action -->
+        <section class="ember" data-background="firebrick">
+          <h4>Ember</h4>
+          <div>
+            Click Action
+            <a href="https://guides.emberjs.com/v2.7.0/components/handling-events/" target="_blank">More</a>
+          </div>
+          <pre>
+            <code class="javascript">
+              // {{chat-container title="Ember Chat"}}
+              export default Ember.Component.extend({
+                classNames: ['chat-room'],
+                title: 'Default Title',
+                linkText: 'Initial Text',
+                actions: {
+                  updateText() {
+                    this.set('linkText', 'Clicked Text');
+                  }
+                }
+              });
+
+              &lt;!-- app/templates/components/chat-container.hbs --&gt;
+              &lt;h1&gt;{{title}}&lt;/h1&gt;
+              &lt;a href="#" onclick={{action 'updateText'}}&gt;{{linkText}}&lt;/a&gt;
+
+              ...
+
+              &lt;!-- output after click --&gt;
+              &lt;div id="ember382" class="ember-view chat-room"&gt;
+                &lt;h1&gt;Ember Chat&lt;/h1&gt;
+                &lt;a href="#"&gt;Clicked Text&lt;/a&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+        </section>
+
       </div>
     </div>
 
