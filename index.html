@@ -418,7 +418,7 @@
         </section>
 
         <!-- Ember - Rendering Component in Component -->
-        <section data-background="royalblue">
+        <section data-background="firebrick">
           <h4>Ember - Rendering Component in Component</h4>
           <pre>
             <code class="javascript">
@@ -490,7 +490,7 @@
         </section>
 
         <!-- Ember - Template Looping -->
-        <section data-background="royalblue">
+        <section data-background="firebrick">
           <h4>Ember - Template Looping</h4>
           <pre>
             <code class="javascript">
@@ -615,7 +615,7 @@
         </section>
 
         <!-- Ember - Observing Change -->
-        <section data-background="royalblue">
+        <section data-background="firebrick">
           <h4>Ember - Observing Change</h4>
           <pre>
             <code class="javascript">
@@ -637,6 +637,58 @@
                   return this.get('messages.length') / 2;
                 })
               });
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- React - Binding Form Input -->
+        <section data-background="royalblue">
+          <h4>React - Binding Form Input</h4>
+          <pre>
+            <code class="javascript">
+// src/scripts/message-form.js
+export default React.createClass({
+  getInitialState() {
+    return {
+      input: ''
+    };
+  },
+
+  updateInput(ev) {
+    this.setState({ input: ev.target.value });
+  },
+
+  render() {
+    return (
+      &lt;form className="message-form clearfix"&gt;
+        &lt;input type="text" value={this.state.input} onChange={this.updateInput} className="message-input" /&gt;
+        &lt;button type="submit" className="message-submit"&gt;Send&lt;/button&gt;
+      &lt;/form&gt;
+    );
+  }
+});
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- Ember - Binding Form Input -->
+        <section data-background="firebrick">
+          <h4>Ember - Binding Form Input</h4>
+          <pre>
+            <code class="javascript">
+              // app/components/message-form.js
+              export default Ember.Component.extend({
+                input: ''
+              });
+
+              &lt;form class="message-form clearfix"&gt;
+                {{input type="text" value=input class="message-input"}}
+                &lt;button type="submit" class="message-submit"&gt;Send&lt;/button&gt;
+              &lt;/form&gt;
             </code>
           </pre>
           <aside class="notes">
