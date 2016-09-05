@@ -595,6 +595,54 @@
           </aside>
         </section>
 
+        <!-- React - Observing Change -->
+        <section data-background="royalblue">
+          <h4>React - Observing Change</h4>
+          <pre>
+            <code class="javascript">
+              // src/scripts/message-list.js
+              export default React.createClass({
+                componentDidUpdate(prevProps, prevState) {
+                  if (this.props.messages.length > prevProps.messages.length) {
+                    // Do something
+                  }
+                }
+              });
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- Ember - Observing Change -->
+        <section data-background="royalblue">
+          <h4>Ember - Observing Change</h4>
+          <pre>
+            <code class="javascript">
+              // src/scripts/message-list.js
+              export default Ember.Component.extend({
+                classNames: ['message-list'],
+                messages: Ember.A([]),
+
+                // didUpdate() {},
+
+                onMessagesChange: Ember.observer('messages.[]', function() {
+                  // Do something
+                  Ember.run.later(() => {
+                    // Do something at the end of the run loop
+                  });
+                }),
+
+                halfMessageCount: Ember.computed('messages.[]', function() {
+                  return this.get('messages.length') / 2;
+                })
+              });
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
       </div>
     </div>
 
