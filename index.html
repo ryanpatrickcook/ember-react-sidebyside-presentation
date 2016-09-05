@@ -447,6 +447,86 @@
           </aside>
         </section>
 
+        <!-- React - Template Looping -->
+        <section data-background="royalblue">
+          <h4>React - Template Looping</h4>
+          <pre>
+            <code class="javascript">
+              // src/scripts/message-list.js
+              export default React.createClass({
+                render() {
+                  let messages = this.props.messages.map((msg) => {
+                    return &lt;ChatMessage key={msg.id} message={msg} /&gt;;
+                  });
+
+                  return (
+                    &lt;div className="message-list"&gt;
+                      &lt;div className="message-list-wrapper"&gt;
+                        &lt;div ref="messageContent" className="message-list-content"&gt;
+                          {messages}
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  );
+                }
+              });
+
+              ...
+
+              &lt;!-- output --&gt;
+              &lt;div class="message-list"&gt;
+                &lt;div class="message-list-wrapper"&gt;
+                  &lt;div class="message-list-content"&gt;
+                    &lt;div class="chat-message"&gt;
+                      ...
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- Ember - Template Looping -->
+        <section data-background="royalblue">
+          <h4>Ember - Template Looping</h4>
+          <pre>
+            <code class="javascript">
+              // app/components/message-list.js
+              export default Ember.Component.extend({
+                classNames: ['message-list'],
+                messages: Ember.A([ {id: 1, text: 'hello world'} ])
+              });
+
+
+              &lt;div class="message-list-wrapper"&gt;
+                &lt;div class="message-list-content"&gt;
+                  {{#each messages as |msg|}}
+                    {{chat-message message=msg}}
+                  {{/each}}
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              ...
+
+              &lt;!-- output --&gt;
+              &lt;div class="message-list"&gt;
+                &lt;div class="message-list-wrapper"&gt;
+                  &lt;div class="message-list-content"&gt;
+                    &lt;div class="chat-message"&gt;
+                      ...
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
         <!-- React Lifecycle -->
         <section data-background="royalblue">
           <h4>React - Component Lifecycle</h4>
