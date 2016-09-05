@@ -17,11 +17,18 @@
           <img src="/images/react.png" width="250"/>
         </section>
 
+        <section data-background="crimson">
+          <h2>Project Links</h2>
+          <br/>
+          <h3><a href="https://github.com/ryanpatrickcook/react-sidebyside-ember-chat" target="_blank" style="color: #fff">React Chat</a></h3>
+          <br/>
+          <h3><a href="https://github.com/ryanpatrickcook/ember-sidebyside-react-chat" target="_blank" style="color: #fff">Ember Chat</a></h3>
+        </section>
+
         <!-- React Init -->
         <section data-background="royalblue">
-          <h4>React</h4>
+          <h4>React - Initial Setup</h4>
           <div>
-            React needs an initial dom node to attach itself and render the app.
             <a href="https://facebook.github.io/react/blog/2015/10/01/react-render-and-top-level-api.html" target="_blank">More</a>
           </div>
           <pre>
@@ -38,13 +45,15 @@
   ReactDOM.render(&lt;ChatContainer /&gt;, document.getElementById('app'));
             </code>
           </pre>
+          <aside class="notes">
+            React needs an initial dom node to attach itself and render the app.
+          </aside>
         </section>
 
         <!-- Ember Init -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember</h4>
+          <h4>Ember - Initial Setup</h4>
           <div>
-            Ember uses a content-for helper to render the app; addons can inject content into your application’s head or body
             <a href="https://ember-cli.com/extending/#content" target="_blank">More</a>
           </div>
           <pre class="ember">
@@ -63,14 +72,15 @@
               &lt;/div&gt;
             </code>
           </pre>
+          <aside class="notes">
+            Ember uses a content-for helper to render the app; addons can inject content into your application’s head or body
+          </aside>
         </section>
 
         <!-- React Component -->
         <section data-background="royalblue">
-          <h4>React</h4>
+          <h4>React - Rendering Component</h4>
           <p>
-            React uses one file to build a component. Every component requires a `render` method that contains
-            the layout of the component. `render` accepts one root node with children.
             <a href="https://facebook.github.io/react/docs/component-specs.html#render" target="_blank">More</a>
           </p>
           <pre>
@@ -95,14 +105,16 @@
               &lt;/div&gt;
             </code>
           </pre>
+          <aside class="notes">
+            React uses one file to build a component. Every component requires a `render` method that contains
+            the layout of the component. `render` accepts one root node with children.
+          </aside>
         </section>
 
         <!-- Ember Component -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember</h4>
+          <h4>Ember - Rendering Component</h4>
           <p>
-            Ember components are built with two files: a view object and a template. Ember component is the root node and the template
-            contains its contents.
             <a href="http://emberjs.com/api/classes/Ember.Component.html" target="_blank">More</a>
           </p>
           <pre>
@@ -124,18 +136,19 @@
               &lt;/div&gt;
             </code>
           </pre>
-          <p>
+          <aside class="notes">
+            Ember components are built with two files: a view object and a template. Ember component is the root node and the template
+            contains its contents.
+
             If you name a component
             `components/hello-world`, you will be able to use in other templates with `{{hello-world}}`
-          </p>
+          </aside>
         </section>
 
         <!-- React Props -->
         <section data-background="royalblue">
-          <h4>React</h4>
+          <h4>React - Variables in Template</h4>
           <div>
-            React displays data through `props` and `state`. State should contain data that a component's event
-            handlers may change to trigger a UI update
             <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
           </div>
           <pre>
@@ -167,13 +180,16 @@
               &lt;/div&gt;
             </code>
           </pre>
+          <aside class="notes">
+            React displays data through `props` and `state`. State should contain data that a component's event
+            handlers may change to trigger a UI update
+          </aside>
         </section>
 
         <!-- Ember Props -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember</h4>
+          <h4>Ember - Properties in Template</h4>
           <div>
-            Ember uses properties that can be used in the template for display. Properties can be set in the component or passed in.
             <a href="https://guides.emberjs.com/v2.7.0/components/customizing-a-components-element/" target="_blank">More</a>
           </div>
           <pre>
@@ -197,13 +213,15 @@
               &lt;/div&gt;
             </code>
           </pre>
+          <aside class="notes">
+            Ember uses properties that can be used in the template for display. Properties can be set in the component or passed in.
+          </aside>
         </section>
 
         <!-- React Lifecycle -->
         <section data-background="royalblue">
-          <h4>React</h4>
+          <h4>React - Component Lifecycle</h4>
           <div>
-            React has various methods that are executed at specific points in a component's lifecycle.
             <a href="https://facebook.github.io/react/docs/component-specs.html" target="_blank">More</a>
           </div>
           <pre>
@@ -233,13 +251,15 @@
       });
             </code>
           </pre>
+          <aside class="notes">
+            React has various methods that are executed at specific points in a component's lifecycle.
+          </aside>
         </section>
 
         <!-- Ember Lifecycle -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember</h4>
+          <h4>Ember - Lifecycle</h4>
           <div>
-            Ember has various methods that are executed at specific points in a component's lifecycle.
             <a href="https://guides.emberjs.com/v2.7.0/components/the-component-lifecycle/" target="_blank">More</a>
           </div>
           <pre>
@@ -262,13 +282,15 @@
           });
             </code>
           </pre>
+          <aside class="notes">
+            Ember has various methods that are executed at specific points in a component's lifecycle.
+          </aside>
         </section>
 
         <!-- React Set Props -->
         <section data-background="royalblue">
-          <h4>React</h4>
+          <h4>React - Updating Variables in Template</h4>
           <div>
-            Set State
             <a href="https://facebook.github.io/react/docs/component-api.html" target="_blank">More</a>
           </div>
           <pre>
@@ -311,9 +333,8 @@
 
         <!-- Ember Set Props -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember</h4>
+          <h4>Ember - Update Variables in Template</h4>
           <div>
-            Set Property
             <a href="https://guides.emberjs.com/v2.7.0/components/customizing-a-components-element/" target="_blank">More</a>
           </div>
           <pre>
@@ -347,9 +368,8 @@
 
         <!-- React Click Action -->
         <section data-background="royalblue">
-          <h4>React</h4>
+          <h4>React - Events/Actions</h4>
           <div>
-            Click Action
             <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
           </div>
           <pre>
@@ -383,16 +403,13 @@
             </code>
           </pre>
           <aside class="notes">
-            setState() does not immediately mutate this.state but creates a pending state transition.
-            Accessing this.state after calling this method can potentially return the existing value.
           </aside>
         </section>
 
         <!-- Ember Click Action -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember</h4>
+          <h4>Ember - Events/Actions</h4>
           <div>
-            Click Action
             <a href="https://guides.emberjs.com/v2.7.0/components/handling-events/" target="_blank">More</a>
           </div>
           <pre>
