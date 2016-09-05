@@ -287,11 +287,12 @@
           </aside>
         </section>
 
-        <!-- React Set Props -->
+        <!-- React Actions -->
         <section data-background="royalblue">
-          <h4>React - Updating Variables in Template</h4>
+          <h4>React - Events/Actions</h4>
           <div>
-            <a href="https://facebook.github.io/react/docs/component-api.html" target="_blank">More</a>
+            <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
+            <a href="https://facebook.github.io/react/docs/events.html" target="_blank">Events</a>
           </div>
           <pre>
             <code class="javascript">
@@ -301,16 +302,14 @@
                 getInitialState() {
                   return { linkText: 'Initial Text' };
                 },
-                componentDidMount() {
-                  setTimeout(() => {
-                    this.setState({ linkText: 'Loaded Text' });
-                  }, 2000);
+                updateText() {
+                  console.log('click event - updateText');
                 },
                 render() {
                   return (
                     &lt;div className="chat-room"&gt;
                       &lt;h1&gt;{this.props.title}&lt;/h1&gt;
-                      &lt;a&gt;{this.state.linkText}&lt;/a&gt;
+                      &lt;a onClick={this.updateText}&gt;{this.state.linkText}&lt;/a&gt;
                     &lt;/div&gt;
                   );
                 }
@@ -321,21 +320,19 @@
               &lt;!-- output --&gt;
               &lt;div class="chat-room"&gt;
                 &lt;h1&gt;React Chat&lt;/h1&gt;
-                &lt;a&gt;Loaded Text&lt;/a&gt;
+                &lt;a&gt;Initial Text&lt;/a&gt;
               &lt;/div&gt;
             </code>
           </pre>
           <aside class="notes">
-            setState() does not immediately mutate this.state but creates a pending state transition.
-            Accessing this.state after calling this method can potentially return the existing value.
           </aside>
         </section>
 
-        <!-- Ember Set Props -->
+        <!-- Ember Actions -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember - Update Variables in Template</h4>
+          <h4>Ember - Events/Actions</h4>
           <div>
-            <a href="https://guides.emberjs.com/v2.7.0/components/customizing-a-components-element/" target="_blank">More</a>
+            <a href="https://guides.emberjs.com/v2.7.0/components/handling-events/#toc_event-names" target="_blank">Events</a>
           </div>
           <pre>
             <code class="javascript">
@@ -344,33 +341,33 @@
                 classNames: ['chat-room'],
                 title: 'Default Title',
                 linkText: 'Initial Text',
-                didInsertElement() {
-                  setTimeout(() => {
-                    this.set('linkText', 'Loaded Text');
-                  }, 2000);
-                },
+                actions: {
+                  updateText() {
+                    console.log('click action - updateText');
+                  }
+                }
               });
 
               &lt;!-- app/templates/components/chat-container.hbs --&gt;
               &lt;h1&gt;{{title}}&lt;/h1&gt;
-              &lt;a&gt;{{linkText}}&lt;/a&gt;
+              &lt;a href="#" onclick={{action 'updateText'}}&gt;{{linkText}}&lt;/a&gt;
 
               ...
 
               &lt;!-- output --&gt;
               &lt;div id="ember382" class="ember-view chat-room"&gt;
                 &lt;h1&gt;Ember Chat&lt;/h1&gt;
-                &lt;a&gt;Loaded Text&lt;/a&gt;
+                &lt;a href="#"&gt;Initial Text&lt;/a&gt;
               &lt;/div&gt;
             </code>
           </pre>
         </section>
 
-        <!-- React Click Action -->
+        <!-- React Set Props -->
         <section data-background="royalblue">
-          <h4>React - Events/Actions</h4>
+          <h4>React - Updating Variables in Template</h4>
           <div>
-            <a href="https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html" target="_blank">More</a>
+            <a href="https://facebook.github.io/react/docs/component-api.html" target="_blank">More</a>
           </div>
           <pre>
             <code class="javascript">
@@ -403,14 +400,16 @@
             </code>
           </pre>
           <aside class="notes">
+            setState() does not immediately mutate this.state but creates a pending state transition.
+            Accessing this.state after calling this method can potentially return the existing value.
           </aside>
         </section>
 
-        <!-- Ember Click Action -->
+        <!-- Ember Set Props -->
         <section class="ember" data-background="firebrick">
-          <h4>Ember - Events/Actions</h4>
+          <h4>Ember - Update Variables in Template</h4>
           <div>
-            <a href="https://guides.emberjs.com/v2.7.0/components/handling-events/" target="_blank">More</a>
+            <a href="https://guides.emberjs.com/v2.7.0/components/customizing-a-components-element/" target="_blank">More</a>
           </div>
           <pre>
             <code class="javascript">
