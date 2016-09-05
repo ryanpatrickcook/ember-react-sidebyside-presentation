@@ -769,6 +769,88 @@ export default React.createClass({
           </aside>
         </section>
 
+        <!-- React - Actions/Conditionals -->
+        <section data-background="royalblue">
+          <h4>React - Actions/Conditionals</h4>
+          <pre>
+            <code class="javascript">
+  // src/scripts/chat-message
+  export default React.createClass({
+    ...
+    editMessage(e) {
+      e.preventDefault();
+      this.setState({
+        editInput: this.props.message.text,
+        isEditing: true
+      });
+    },
+    updateMessage(e) {
+      e.preventDefault();
+      this.setState({ isEditing: false });
+      // then update message
+    },
+    updateInput(e) {
+      this.setState({ editInput: e.target.value });
+    },
+    render() {
+      var inputText = this.props.message.text;
+      var actionButton = &lt;a className="btn-edit-message " onClick={this.editMessage}&gt;Edit&lt;/a&gt;;
+      if (this.state.isEditing) {
+        inputText = &lt;input type="text" value={this.state.editInput} onChange={this.updateInput} /&gt;
+        actionButton = &lt;a className="btn-edit-message " onClick={this.updateMessage}&gt;Done&lt;/a&gt;;
+      }
+      return (
+        &lt;div data-id={this.props.message.id} className="chat-message"&gt;
+          {inputText}
+          {actionButton}
+        &lt;/div&gt;
+      );
+    }
+  });
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- Ember - Actions/Conditionals -->
+        <section data-background="firebrick">
+          <h4>Ember - Actions/Conditionals</h4>
+          <pre>
+            <code class="javascript">
+              // app/components/chat-message
+              export default Ember.Component.extend({
+                classNames: ['chat-message'],
+                isEditing: false,
+                message: {},
+                editInput: Ember.computed.oneWay('message.text'),
+                actions: {
+                  editMessage() {
+                    this.set('isEditing', true);
+                  },
+                  updateMessage() {
+                    let input = this.get('editInput');
+                    let message = this.get('message');
+                    this.set('isEditing', false);
+                    // then update message
+                  }
+                }
+              });
+
+              &lt;!-- app/templates/components/chat-message --&gt;
+              {{#if isEditing}}
+                {{input type="text" value=editInput class="message-input" insert-newline="updateMessage"}}
+                &lt;a class="btn-edit-message" {{action 'updateMessage'}}&gt;Done&lt;/a&gt;
+              {{else}}
+                {{message.text}}
+                &lt;a class="btn-edit-message" {{action 'editMessage'}}&gt;Edit&lt;/a&gt;
+              {{/if}}
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
       </div>
     </div>
 
