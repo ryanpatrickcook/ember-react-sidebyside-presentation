@@ -429,6 +429,7 @@
                 messages: Ember.A([])
               });
 
+              &lt;!-- app/templates/components/chat-container.hbs --&gt;
               &lt;h1&gt;{{title}}&lt;/h1&gt;
               {{message-list messages=messages}}
 
@@ -500,7 +501,7 @@
                 messages: Ember.A([ {id: 1, text: 'hello world'} ])
               });
 
-
+              &lt;!-- app/templates/components/message-list.hbs --&gt;
               &lt;div class="message-list-wrapper"&gt;
                 &lt;div class="message-list-content"&gt;
                   {{#each messages as |msg|}}
@@ -619,7 +620,7 @@
           <h4>Ember - Observing Change</h4>
           <pre>
             <code class="javascript">
-              // src/scripts/message-list.js
+              // app/components/message-list.js
               export default Ember.Component.extend({
                 classNames: ['message-list'],
                 messages: Ember.A([]),
@@ -685,7 +686,80 @@ export default React.createClass({
                 input: ''
               });
 
+              &lt;!-- app/templates/components/message-form.hbs --&gt;
               &lt;form class="message-form clearfix"&gt;
+                {{input type="text" value=input class="message-input"}}
+                &lt;button type="submit" class="message-submit"&gt;Send&lt;/button&gt;
+              &lt;/form&gt;
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- React - Sending action out of component -->
+        <section data-background="royalblue">
+          <h4>React - Sending action out of component</h4>
+          <pre>
+            <code class="javascript">
+  // src/scripts/chat-container
+  // &lt;MessageForm addMessage={this.newMessage} /&gt;
+
+  // src/scripts/message-form
+  export default React.createClass({
+    ...
+    submit(ev) {
+      ev.preventDefault();
+      var message = this.state.input;
+      if(message === '') {
+        return;
+      }
+
+      this.props.addMessage(message);
+      this.setState({ input: '' });
+    },
+
+    render() {
+      return (
+        &lt;form className="message-form clearfix" onSubmit={this.submit}&gt;
+          &lt;input type="text" value={this.state.input} onChange={this.updateInput} className="message-input" /&gt;
+          &lt;button type="submit" className="message-submit"&gt;Send&lt;/button&gt;
+        &lt;/form&gt;
+      );
+    }
+  });
+            </code>
+          </pre>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!-- Ember - Sending action out of component -->
+        <section data-background="firebrick">
+          <h4>Ember - Sending action out of component</h4>
+          <pre>
+            <code class="javascript">
+              // app/templates/components/chat-container.hbs
+              // {{message-form addMessage="newMessage"}}
+
+              // app/components/message-form.js
+              export default Ember.Component.extend({
+                input: '',
+
+                actions: {
+                  submitMessage() {
+                    let input = this.get('input');
+                    if (Ember.isEmpty(input)) {
+                      return;
+                    }
+                    this.sendAction('addMessage', this.get('input'));
+                    this.set('input', '');
+                  }
+                }
+              });
+
+              &lt;!-- app/templates/components/message-form.hbs --&gt;
+              &lt;form class="message-form clearfix" {{action "submitMessage" on="submit"}}&gt;
                 {{input type="text" value=input class="message-input"}}
                 &lt;button type="submit" class="message-submit"&gt;Send&lt;/button&gt;
               &lt;/form&gt;
