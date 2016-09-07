@@ -70,6 +70,13 @@
                 {{chat-container}}
                 {{outlet}}
               &lt;/div&gt;
+
+              // app/app.js
+              App = Ember.Application.extend({
+                modulePrefix: config.modulePrefix,
+                podModulePrefix: config.podModulePrefix,
+                Resolver
+              });
             </code>
           </pre>
           <aside class="notes">
@@ -161,11 +168,14 @@
                 getDefaultProps() {
                   return { title: 'Default Title' };
                 },
-                render() {
+                classNames() {
                   let classname = 'chat-room';
                   classname += this.state.show ? ' show' : ' hide';
+                  return classname;
+                },
+                render() {
                   return (
-                    &lt;div className={classname}&gt;
+                    &lt;div className={this.classNames()}&gt;
                       &lt;h1&gt;{this.props.title}&lt;/h1&gt;
                     &lt;/div&gt;
                   );
@@ -233,7 +243,8 @@
                 getInitialState() {
                   return { linkText: 'Initial Text' };
                 },
-                updateText() {
+                updateText(e) {
+                  e.preventDefault();
                   console.log('click event - updateText');
                   if (this.state.linkText == 'Initial Text') {
                     // Do something
@@ -313,7 +324,8 @@
                 getInitialState() {
                   return { linkText: 'Initial Text' };
                 },
-                updateText() {
+                updateText(e) {
+                  e.preventDefault();
                   if (this.state.linkText == 'Initial Text') {
                     this.setState({ linkText: 'Clicked Text' });
                   }
@@ -426,6 +438,7 @@
               // app/components/chat-container.js
               export default Ember.Component.extend({
                 classNames: ['chat-room'],
+                title: '',
                 messages: Ember.A([])
               });
 
@@ -455,16 +468,17 @@
             <code class="javascript">
               // src/scripts/message-list.js
               export default React.createClass({
-                render() {
-                  let messages = this.props.messages.map((msg) => {
+                allMessages() {
+                  return this.props.messages.map((msg) => {
                     return &lt;ChatMessage key={msg.id} message={msg} /&gt;;
                   });
-
+                },
+                render() {
                   return (
                     &lt;div className="message-list"&gt;
                       &lt;div className="message-list-wrapper"&gt;
                         &lt;div ref="messageContent" className="message-list-content"&gt;
-                          {messages}
+                          {this.allMessages()}
                         &lt;/div&gt;
                       &lt;/div&gt;
                     &lt;/div&gt;
@@ -498,7 +512,7 @@
               // app/components/message-list.js
               export default Ember.Component.extend({
                 classNames: ['message-list'],
-                messages: Ember.A([ {id: 1, text: 'hello world'} ])
+                messages: Ember.A([])
               });
 
               &lt;!-- app/templates/components/message-list.hbs --&gt;
@@ -702,10 +716,10 @@ export default React.createClass({
           <h4>React - Sending action out of component</h4>
           <pre>
             <code class="javascript">
-  // src/scripts/chat-container
+  // src/scripts/chat-container.js
   // &lt;MessageForm addMessage={this.newMessage} /&gt;
 
-  // src/scripts/message-form
+  // src/scripts/message-form.js
   export default React.createClass({
     ...
     submit(ev) {
@@ -772,8 +786,10 @@ export default React.createClass({
         <!-- React - Actions/Conditionals -->
         <section data-background="royalblue">
           <h4>React - Actions/Conditionals</h4>
-          <pre>
+          <pre style="max-height: 600px;">
             <code class="javascript">
+  // &lt;ChatMessage key={msg.id} message={msg} /&gt;;
+
   // src/scripts/chat-message
   export default React.createClass({
     ...
@@ -784,25 +800,36 @@ export default React.createClass({
         isEditing: true
       });
     },
+
     updateMessage(e) {
       e.preventDefault();
       this.setState({ isEditing: false });
-      // then update message
+      MessageStore.updateMessage(this.props.message, this.state.editInput);
     },
+
     updateInput(e) {
       this.setState({ editInput: e.target.value });
     },
+
+    inputText() {
+      let text = this.props.message.text;
+      if (this.state.isEditing)
+        text = &lt;input type="text" value={this.state.editInput} onChange={this.updateInput} /&gt;
+      return text;
+    },
+
+    actionButton() {
+      let btn =  &lt;a className="btn-edit-message" onClick={this.editMessage}&gt;Edit&lt;/a&gt;;
+      if (this.state.isEditing)
+        btn = &lt;a className="btn-edit-message" onClick={this.updateMessage}&gt;Done&lt;/a&gt;;
+      return btn;
+    },
+
     render() {
-      var inputText = this.props.message.text;
-      var actionButton = &lt;a className="btn-edit-message " onClick={this.editMessage}&gt;Edit&lt;/a&gt;;
-      if (this.state.isEditing) {
-        inputText = &lt;input type="text" value={this.state.editInput} onChange={this.updateInput} /&gt;
-        actionButton = &lt;a className="btn-edit-message " onClick={this.updateMessage}&gt;Done&lt;/a&gt;;
-      }
       return (
         &lt;div data-id={this.props.message.id} className="chat-message"&gt;
-          {inputText}
-          {actionButton}
+          {this.inputText()}
+          {this.actionButton()}
         &lt;/div&gt;
       );
     }
@@ -818,11 +845,12 @@ export default React.createClass({
           <h4>Ember - Actions/Conditionals</h4>
           <pre>
             <code class="javascript">
-              // app/components/chat-message
+              // app/components/chat-message.js
               export default Ember.Component.extend({
                 classNames: ['chat-message'],
                 isEditing: false,
                 message: {},
+                messageStore: Ember.inject.service(),
                 editInput: Ember.computed.oneWay('message.text'),
                 actions: {
                   editMessage() {
@@ -831,13 +859,13 @@ export default React.createClass({
                   updateMessage() {
                     let input = this.get('editInput');
                     let message = this.get('message');
+                    this.get('messageStore').updateMessage(message, input);
                     this.set('isEditing', false);
-                    // then update message
                   }
                 }
               });
 
-              &lt;!-- app/templates/components/chat-message --&gt;
+              &lt;!-- app/templates/components/chat-message.hbs --&gt;
               {{#if isEditing}}
                 {{input type="text" value=editInput class="message-input" insert-newline="updateMessage"}}
                 &lt;a class="btn-edit-message" {{action 'updateMessage'}}&gt;Done&lt;/a&gt;
@@ -857,6 +885,7 @@ export default React.createClass({
           <h4>React - Message Store</h4>
           <pre>
             <code class="javascript">
+              // src/scripts/message-store.js
               import EventEmitter from 'events';
 
               const emitter = new EventEmitter();
@@ -900,6 +929,7 @@ export default React.createClass({
           <h4>React - Message Store (cont)</h4>
           <pre>
             <code class="javascript">
+              // src/scripts/chat-container.js
               import MessageStore from './message-store';
 
               export default React.createClass({
@@ -939,6 +969,7 @@ export default React.createClass({
           <h4>Ember - Message Store</h4>
           <pre>
             <code class="javascript">
+              // app/services/message-store.js
               export default Ember.Service.extend({
                 messages: Ember.A([]),
 
@@ -970,6 +1001,7 @@ export default React.createClass({
           <h4>Ember - Message Store (cont)</h4>
           <pre>
             <code class="javascript">
+              // app/components/chat-container.js
               export default Ember.Component.extend({
                 classNames: ['chat-room'],
                 messageStore: Ember.inject.service(),
